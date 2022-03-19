@@ -1,14 +1,16 @@
 version: "3.9"
-   
+
 services:
   db:
     image: postgres
+    restart: always
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -22,3 +24,24 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - "db"
+      - "redis"
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - ./volumes/redis_volume/:/data/
+
+  web_worker:
+    build: .
+    restart: always
+    depends_on:
+      - redis
+      - web
+    command: bash -c "celery -A locsite worker -B -l INFO"
+    volumes:
+      - ./volumes/:/home/
+    environment:
+      - CELERY_BROKER=redis://redis:6379/0
