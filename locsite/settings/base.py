@@ -54,7 +54,7 @@ THIRD_PARTY_APPS = [
 ]
 
 CREATED_APPS = [
-    # your created apps here
+    'apps.user'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + CREATED_APPS
@@ -71,6 +71,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'locsite.urls'
+
+AUTH_USER_MODEL = 'user.User'
 
 TEMPLATES = [
     {
@@ -128,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR + '/static/'
+STATIC_ROOT = BASE_DIR.joinpath('/static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
