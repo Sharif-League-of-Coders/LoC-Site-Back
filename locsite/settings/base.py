@@ -55,7 +55,7 @@ THIRD_PARTY_APPS = [
 ]
 
 CREATED_APPS = [
-    'apps.user'
+  'apps.blog'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + CREATED_APPS
@@ -73,7 +73,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'locsite.urls'
 
-AUTH_USER_MODEL = 'user.User'
+#AUTH_USER_MODEL = 'user.User'
 
 TEMPLATES = [
     {
@@ -112,6 +112,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'test_db',
+    }
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -132,40 +139,42 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR.joinpath('/static')
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_SSL = config('EMAIL_USE_SSL')
-EMAIL_BACKEND = config('EMAIL_BACKEND')
-
-try:
-    from .celery import *
-except Exception:
-    pass
-
-try:
-    from .cors_settings import *
-except Exception:
-    pass
-
-try:
-    from .drf_settings import *
-except Exception:
-    pass
-
-try:
-    from .martor import *
-except Exception:
-    pass
-
-try:
-    from .staging import *
-except Exception:
-    pass
+# EMAIL_HOST = config('EMAIL_HOST')
+# EMAIL_PORT = config('EMAIL_PORT')
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_SSL = config('EMAIL_USE_SSL')
+# EMAIL_BACKEND = config('EMAIL_BACKEND')
+#
+# try:
+#     from .celery import *
+# except Exception:
+#     pass
+#
+# try:
+#     from .cors_settings import *
+# except Exception:
+#     pass
+#
+# try:
+#     from .drf_settings import *
+# except Exception:
+#     pass
+#
+# try:
+#     from .martor import *
+# except Exception:
+#     pass
+#
+# try:
+#     from .staging import *
+# except Exception:
+#     pass
