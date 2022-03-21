@@ -55,7 +55,8 @@ THIRD_PARTY_APPS = [
 ]
 
 CREATED_APPS = [
-    'apps.user'
+  'apps.blog',
+  'apps.user'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + CREATED_APPS
@@ -119,6 +120,13 @@ AUTHENTICATION_BACKENDS = [
     # 'apps.accounts.backends.PhoneNumberAuthenticationBackend',
 ]
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'test_db',
+    }
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -139,6 +147,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR.joinpath('/static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
