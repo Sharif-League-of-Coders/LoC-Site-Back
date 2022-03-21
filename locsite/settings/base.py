@@ -58,6 +58,7 @@ CREATED_APPS = [
   'apps.blog',
   'apps.user',
   'apps.team',
+    'homepage',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + CREATED_APPS
