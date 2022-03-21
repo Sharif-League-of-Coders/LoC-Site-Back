@@ -1,1 +1,1 @@
-from homepage.admin import staff
+from homepage.admin import staff, sponsor, home

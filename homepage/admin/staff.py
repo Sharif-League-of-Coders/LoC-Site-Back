@@ -4,4 +4,17 @@ from homepage.models import Staff
 
 @admin.register(Staff)
 class StaffAdmin(admin.ModelAdmin):
-    pass
+    fields = (
+        'name',
+        'position',
+        'image',
+        'email',
+        'show_in_homepage',
+    )
+    list_display = (
+        'name',
+        'position',
+        'image',
+        'email',
+        'show_in_homepage',
+    )

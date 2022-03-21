@@ -1,10 +1,9 @@
-from datetime import datetime
-
 from django.db import models
 
+from _helpers.models import BaseModel
 
-class Staff(models.Model):
-    created = models.DateTimeField(auto_created=True, verbose_name='created', default=datetime.now())
+
+class Staff(BaseModel):
     name = models.CharField(max_length=120, verbose_name='name')
     position = models.CharField(max_length=220, verbose_name='position')
     image = models.ImageField(verbose_name='pic')
@@ -13,3 +12,5 @@ class Staff(models.Model):
 
     class Meta:
         unique_together = ('name', 'email')
+        verbose_name = 'Staff'
+        verbose_name_plural = 'Staffs'
