@@ -83,9 +83,6 @@ class LoginAPIView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        user = authenticate(request=request,
-                            username=serializer.validated_data['username'],
-                            password=serializer.validated_data['password'])
         return HttpResponseRedirect('/api/user/person', {'token': token.key})
 
 
