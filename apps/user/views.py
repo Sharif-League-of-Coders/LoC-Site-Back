@@ -1,6 +1,6 @@
-from django.db.models import F, Value
-from django.db.models.functions import Concat
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import authenticate
 from django.utils import timezone
 from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
@@ -58,6 +58,37 @@ class ActivateAPIView(GenericAPIView):
                         status=status.HTTP_200_OK)
 
 
+class LoginAPIView(GenericAPIView):
+    serializer_class = LoginSerializer
+
+    def get(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(data={'data': serializer.data},
+                        status=status.HTTP_200_OK)
+
+    def get_serializer_context(self):
+        return {
+            'request': self.request,
+            'format': self.format_kwarg,
+            'view': self
+        }
+
+    def get_serializer(self, *args, **kwargs):
+        kwargs['context'] = self.get_serializer_context()
+        return self.serializer_class(*args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        user = authenticate(request=request,
+                            username=serializer.validated_data['username'],
+                            password=serializer.validated_data['password'])
+        return HttpResponseRedirect('/api/user/person', {'token': token.key})
+
+
 class LogoutAPIView(GenericAPIView):
     queryset = Person.objects.all()
     permission_classes = [IsAuthenticated]
@@ -91,11 +122,13 @@ class PersonAPIView(GenericAPIView):
     def get(self, request):
         user = request.user
         data = self.get_serializer(instance=user.person).data
-        return Response(data={'data': data}, status=status.HTTP_200_OK)
+        return Response(data={'data': data,
+                              'token': Token.objects.get(user=user)},
+                        status=status.HTTP_200_OK)
 
     def put(self, request):
         user = request.user
-        serializer = PersonSerializer(instance=user.profile,
+        serializer = PersonSerializer(instance=user.person,
                                       data=request.data,
                                       partial=True)
         serializer.is_valid(raise_exception=True)

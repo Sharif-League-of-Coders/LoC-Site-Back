@@ -1,5 +1,5 @@
 import requests
-
+from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
@@ -12,6 +12,7 @@ from .models import *
 
 
 class PersonSerializer(serializers.ModelSerializer):
+    token = serializers.SerializerMethodField('_token')
     is_complete = serializers.SerializerMethodField('_is_complete')
     email = serializers.SerializerMethodField('_email')
     has_team = serializers.SerializerMethodField('_has_team')
@@ -28,9 +29,30 @@ class PersonSerializer(serializers.ModelSerializer):
     def _email(obj: Person):
         return obj.user.email
 
+    @staticmethod
+    def _token(obj: Person):
+        return Token.objects.get(user=obj.user)
+
     class Meta:
         model = Person
         exclude = ['user', 'id', ]
+
+
+class PersonWithTeamSerializer(serializers.ModelSerializer):
+    is_complete = serializers.SerializerMethodField('_is_complete')
+    has_team = serializers.SerializerMethodField('_has_team')
+
+    @staticmethod
+    def _has_team(obj: Person):
+        return obj.user.team is not None
+
+    @staticmethod
+    def _is_complete(obj: Person):
+        return obj.is_complete
+
+    class Meta:
+        model = Person
+        exclude = ('id', 'user', 'phonenumber',)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -77,6 +99,44 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
         return user
+
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField(
+        label=_("Username"),
+        write_only=True
+    )
+    password = serializers.CharField(
+        label=_("Password"),
+        style={'input_type': 'password'},
+        trim_whitespace=False,
+        write_only=True
+    )
+    token = serializers.CharField(
+        label=_("Token"),
+        read_only=True
+    )
+
+    def validate(self, attrs):
+        username = attrs.get('username')
+        password = attrs.get('password')
+
+        if username and password:
+            user = authenticate(request=self.context.get('request'),
+                                username=username, password=password)
+
+            # The authenticate call simply returns None for is_active=False
+            # users. (Assuming the default ModelBackend authentication
+            # backend.)
+            if not user:
+                msg = _('Unable to log in with provided credentials.')
+                raise serializers.ValidationError(msg, code='authorization')
+        else:
+            msg = _('Must include "username" and "password".')
+            raise serializers.ValidationError(msg, code='authorization')
+
+        attrs['user'] = user
+        return attrs
 
 
 class ResetPasswordConfirmSerializer(serializers.ModelSerializer):

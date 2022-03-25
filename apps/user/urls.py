@@ -3,7 +3,7 @@ from django.urls import path, include
 from .views import *
 
 urlpatterns = [
-    path('login', view=ObtainAuthToken.as_view(), name='login'),
+    path('login', view=LoginAPIView.as_view(), name='login'),
     path('is-active', view=IsActivatedAPIView.as_view(), name='is_active'),
     path('signup', view=SignUpAPIView.as_view(), name='signup'),
     path('activate/<slug:eid>/<slug:token>', view=ActivateAPIView.as_view(),
