@@ -1,5 +1,5 @@
 from django.contrib import admin
-from homepage.models import Sponsor
+from apps.homepage.models import Sponsor
 
 
 @admin.register(Sponsor)

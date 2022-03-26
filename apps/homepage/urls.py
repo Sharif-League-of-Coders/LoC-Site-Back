@@ -1,5 +1,5 @@
 from django.urls import path
-from homepage.views import StaffView, HomePageStaffView, SponsorView, HomeView
+from apps.homepage.views import StaffView, HomePageStaffView, SponsorView, HomeView
 
 urlpatterns = [
     path('staff/all/', StaffView.as_view()),

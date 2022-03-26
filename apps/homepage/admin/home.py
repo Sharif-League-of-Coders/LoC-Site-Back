@@ -1,5 +1,5 @@
 from django.contrib import admin
-from homepage.models import Home
+from apps.homepage.models import Home
 
 
 @admin.register(Home)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from homepage.models import Home
+from apps.homepage.models import Home
 
 
 class HomeSerializer(serializers.ModelSerializer):
