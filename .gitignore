@@ -1,3 +1,4 @@
 *.pyc
 venv
 test_db
+locsite/settings
