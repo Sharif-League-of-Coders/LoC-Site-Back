@@ -93,10 +93,6 @@ class User(AbstractUser):
         activate_user_token.delete()
         user.save()
 
-    def reject_all_pending_invites(self):
-        invitations = self.invitations.filter(status="pending")
-        invitations.update(status="rejected")
-
 
 class Person(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,

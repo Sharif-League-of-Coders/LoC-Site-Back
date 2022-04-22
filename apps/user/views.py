@@ -83,7 +83,7 @@ class LoginAPIView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        return Response(data={'token': token.key}, status=status.HTTP_200_OK)
+        return HttpResponseRedirect('/api/user/person', {'token': token.key})
 
 
 class LogoutAPIView(GenericAPIView):
