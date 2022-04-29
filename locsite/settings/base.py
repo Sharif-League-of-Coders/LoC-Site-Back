@@ -122,12 +122,12 @@ AUTHENTICATION_BACKENDS = [
     # 'apps.accounts.backends.PhoneNumberAuthenticationBackend',
 ]
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'test_db',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'test_db',
+#     }
+# }
 
 
 # Internationalization
@@ -166,19 +166,20 @@ EMAIL_BACKEND = config('EMAIL_BACKEND')
 
 LOG_ROOT = config('LOG_ROOT')
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": config('DB_NAME'),
-#         "USER": config('DB_USER'),
-#         "PASSWORD": config('DB_PASSWORD'),
-#         "HOST": config('DB_HOST'),
-#         "PORT": config('DB_PORT'),
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": config('DB_NAME'),
+        "USER": config('DB_USER'),
+        "PASSWORD": config('DB_PASSWORD'),
+        "HOST": config('DB_HOST'),
+        "PORT": config('DB_PORT'),
+    }
+}
 
 # CSRF_COOKIE_HTTPONLY = True
 # DRF_TRACKING_ADMIN_LOG_READONLY = True
+#
 
 # CORS_REPLACE_HTTPS_REFERER = True
 # HOST_SCHEME = "https://"
@@ -188,7 +189,8 @@ LOG_ROOT = config('LOG_ROOT')
 # CSRF_COOKIE_SECURE = True
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_HSTS_SECONDS = 1000000
-# SECURE_FRAME_DENY = True
+
+# SECURE_FRAME_DENY = True //todo
 
 CORS_ORIGIN_ALLOW_ALL = True
 

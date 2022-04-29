@@ -62,14 +62,6 @@ class UserSerializer(serializers.ModelSerializer):
         max_length=32,
         required=True,
     )
-    first_name = serializers.CharField(
-        max_length=32,
-        required=True
-    )
-    last_name = serializers.CharField(
-        max_length=32,
-        required=True
-    )
     email = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())]
     )
@@ -83,7 +75,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email', 'phone_number', 'password_1', 'password_2',
-                  'person', 'first_name', 'last_name']
+                  'person']
 
     def validate(self, attrs):
         if attrs.get('password_1') != attrs.get('password_2'):
@@ -103,9 +95,7 @@ class UserSerializer(serializers.ModelSerializer):
         )
         person = Person.objects.create(
             user=user,
-            phonenumber=validated_data.get('phone_number'),
-            firstname=validated_data.get('first_name'),
-            lastname=validated_data.get('last_name'),
+            phonenumber=validated_data.get('phone_number')
         )
 
         return user

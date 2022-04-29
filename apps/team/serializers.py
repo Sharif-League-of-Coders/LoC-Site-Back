@@ -30,7 +30,7 @@ class TeamSerializer(serializers.ModelSerializer):
         current_user = self.context['request'].user
         data['creator'] = current_user
 
-        team = Team.objects.create(**data)
+        team = Team.humans.create(**data)
 
         current_user.team = team
         current_user.save()
