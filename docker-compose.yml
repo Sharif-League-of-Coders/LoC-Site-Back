@@ -31,7 +31,7 @@ services:
       "
     volumes:
       - .:/app/loc/
-      - ./static/:/app/loc/static/
+      - ./static/:/static
       - ./media/:/app/loc/locsite/media/
       - /var/log/locsite:/var/log/locsite
       - cachedata:/cachec
