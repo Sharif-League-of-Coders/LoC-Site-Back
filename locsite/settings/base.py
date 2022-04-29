@@ -39,6 +39,7 @@ DEFAULT_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ]
 
 THIRD_PARTY_APPS = [
@@ -121,12 +122,12 @@ AUTHENTICATION_BACKENDS = [
     # 'apps.accounts.backends.PhoneNumberAuthenticationBackend',
 ]
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'test_db',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'test_db',
+#     }
+# }
 
 
 # Internationalization
@@ -179,6 +180,7 @@ DATABASES = {
 # CSRF_COOKIE_HTTPONLY = True
 # DRF_TRACKING_ADMIN_LOG_READONLY = True
 #
+
 # CORS_REPLACE_HTTPS_REFERER = True
 # HOST_SCHEME = "https://"
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -187,6 +189,7 @@ DATABASES = {
 # CSRF_COOKIE_SECURE = True
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_HSTS_SECONDS = 1000000
+
 # SECURE_FRAME_DENY = True //todo
 
 CORS_ORIGIN_ALLOW_ALL = True
