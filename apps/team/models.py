@@ -6,11 +6,11 @@ from apps.user.models import User
 class Team(models.Model):
     name = models.CharField(max_length=50, unique=True)
     creator = models.ForeignKey(to=User,
-                                on_delete=models.RESTRICT,
+                                on_delete=models.CASCADE,
                                 related_name='created_teams')
 
     def is_complete(self):
-        return self.first_teammate and self.second_teammate
+        return self.first_teammate and self.second_teammate  # todo: debug
 
     def member_count(self):
         return self.members.count()
