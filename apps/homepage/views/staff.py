@@ -8,10 +8,10 @@ from apps.homepage.serializer import StaffSerializer
 class StaffView(ListAPIView):
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
-    permission_classes = [IsAuthenticated]
+#    permission_classes = [IsAuthenticated]
 
 
 class HomePageStaffView(ListAPIView):
     queryset = Staff.objects.filter(show_in_homepage=True)
     serializer_class = StaffSerializer
-    permission_classes = [IsAuthenticated]
+#    permission_classes = [IsAuthenticated]
