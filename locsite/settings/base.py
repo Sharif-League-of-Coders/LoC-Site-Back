@@ -57,7 +57,7 @@ CREATED_APPS = [
   'apps.blog',
   'apps.user',
   'apps.team',
-    'apps.homepage',
+  'apps.homepage',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + CREATED_APPS
@@ -166,6 +166,8 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = config('EMAIL_USE_SSL')
 EMAIL_BACKEND = config('EMAIL_BACKEND')
+
+DOMAIN = 'http://loc.stest.ir:800/'
 
 LOG_ROOT = config('LOG_ROOT')
 
