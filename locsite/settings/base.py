@@ -167,7 +167,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = config('EMAIL_USE_SSL')
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 
-DOMAIN = 'http://loc.stest.ir:800/'
+DOMAIN = 'http://loc.stest.ir/'
 
 LOG_ROOT = config('LOG_ROOT')
 
