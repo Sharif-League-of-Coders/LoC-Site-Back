@@ -25,7 +25,6 @@ class User(AbstractUser):
             'domain': settings.DOMAIN,
             'eid': activate_user_token.eid,
             'token': activate_user_token.token,
-            'first_name': self.person.firstname
         }
 
         from django.core.mail.message import EmailMultiAlternatives
@@ -33,7 +32,7 @@ class User(AbstractUser):
         from django.template.loader import render_to_string
         from django.utils.html import strip_tags
 
-        email_message_html = render_to_string('user/registerifinal.htm',
+        email_message_html = render_to_string('user/user_activate_email.html',
                                               context=context)
         email_message_plaintext = strip_tags(email_message_html)
 
