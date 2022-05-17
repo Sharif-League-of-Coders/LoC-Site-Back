@@ -54,7 +54,7 @@ class ActivateAPIView(GenericAPIView):
 
     def get(self, request, eid, token):
         User.activate(eid, token)
-        response = redirect('/login', email_verified=True)
+        response = redirect('/login?email_verified=True')
         return response
 
 
