@@ -29,22 +29,22 @@ class User(AbstractUser):
 
         from django.core.mail.message import EmailMultiAlternatives
         from django.core.mail import DEFAULT_ATTACHMENT_MIME_TYPE
-        from django.template.loader import render
+        from django.template.loader import render_to_string
         from django.utils.html import strip_tags
 
-        email_message_html = render('user/user_activate_email.html',
+        email_message_html = render_to_string('user/user_activate_email.html',
                                         context=context)
-        # email_message_plaintext = strip_tags(email_message_html)
+        email_message_plaintext = strip_tags(email_message_html)
 
         email = EmailMultiAlternatives(
             subject='فعالساری اکانت LoC',
-            body=email_message_html,
+            body=email_message_plaintext,
             from_email=settings.EMAIL_SENDER_USER,
             to=[self.email]
         )
         email.content_subtype = "html"
 
-        # email.attach_alternative(email_message_html, 'text/html')
+        email.attach_alternative(email_message_html, 'text/html')
         email.send()
 
     def send_password_confirm_email(self):
