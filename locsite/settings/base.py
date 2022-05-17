@@ -150,7 +150,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticdj/'
 STATIC_ROOT = BASE_DIR.joinpath('/static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -195,7 +195,7 @@ DATABASES = {
 # CSRF_COOKIE_SECURE = True
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_HSTS_SECONDS = 1000000
-CSRF_TRUSTED_ORIGINS=['http://188.121.123.91:800']
+CSRF_TRUSTED_ORIGINS=['https://locsharif.com']
 # SECURE_FRAME_DENY = True //todo
 
 CORS_ORIGIN_ALLOW_ALL = True
