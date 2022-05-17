@@ -29,7 +29,7 @@ class User(AbstractUser):
 
         from django.core.mail.message import EmailMultiAlternatives
         from django.core.mail import DEFAULT_ATTACHMENT_MIME_TYPE
-        from django.template.loader import render_to_string
+        from django.template.loader import render
         from django.utils.html import strip_tags
 
         email_message_html = render('user/user_activate_email.html',
