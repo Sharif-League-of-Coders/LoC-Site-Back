@@ -9,6 +9,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.generics import GenericAPIView
+from rest_framework.response import HttpResponseRedirect
 
 from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 
@@ -42,12 +43,15 @@ class SignUpAPIView(GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        user.send_activation_email()
+	user.is_active = True
 
-        return Response(
-            data={'detail': _('Check your email for confirmation link')},
-            status=200
-        )
+	return HttpResponseRedirect(redirect_to='/dashboard')
+#        user.send_activation_email()
+
+#        return Response(
+#            data={'detail': _('Check your email for confirmation link')},
+#            status=200
+#        )
 
 
 class ActivateAPIView(GenericAPIView):
