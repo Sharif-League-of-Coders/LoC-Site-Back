@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate
 from django.utils import timezone
 from django.utils.http import urlsafe_base64_decode
@@ -54,8 +54,9 @@ class ActivateAPIView(GenericAPIView):
 
     def get(self, request, eid, token):
         User.activate(eid, token)
-        return Response(data={'detail': _('Account Activated')},
-                        status=status.HTTP_200_OK)
+        response = redirect('/login')
+        response['email_verified'] = True
+        return response
 
 
 class LoginAPIView(GenericAPIView):
