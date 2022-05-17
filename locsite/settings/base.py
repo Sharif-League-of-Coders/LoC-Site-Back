@@ -168,7 +168,7 @@ EMAIL_USE_SSL = config('EMAIL_USE_SSL')
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_SENDER_USER = config('EMAIL_SENDER_USER')
 
-DOMAIN = 'https://locsharif.com/'
+DOMAIN = 'https://locsharif.com'
 
 LOG_ROOT = config('LOG_ROOT')
 
