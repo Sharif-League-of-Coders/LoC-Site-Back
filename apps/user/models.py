@@ -38,12 +38,12 @@ class User(AbstractUser):
 
         email = EmailMultiAlternatives(
             subject='فعالساری اکانت LoC',
-            body=email_message_plaintext,
+            body=email_message_html,
             from_email=settings.EMAIL_SENDER_USER,
             to=[self.email]
         )
 
-        email.attach_alternative(email_message_html, 'txt/html')
+        # email.attach_alternative(email_message_html, 'txt/html')
         email.send()
 
     def send_password_confirm_email(self):

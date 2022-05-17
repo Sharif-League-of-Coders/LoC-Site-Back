@@ -55,7 +55,7 @@ class ActivateAPIView(GenericAPIView):
 
     def get(self, request, eid, token):
         User.activate(eid, token)
-        response = render_to_string('user/user_email_activated_callback.html')
+        response = HttpResponse('user/user_email_activated_callback.html')
         return response
 
 
