@@ -18,6 +18,7 @@ from rest_framework.response import Response
 from .models import Person, User, ResetPasswordToken
 from .serializers import *
 
+from django.template.loader import render_to_string
 
 class IsActivatedAPIView(GenericAPIView):
     serializer_class = EmailSerializer
@@ -54,7 +55,7 @@ class ActivateAPIView(GenericAPIView):
 
     def get(self, request, eid, token):
         User.activate(eid, token)
-        response = redirect('/login?email_verified=True')
+        response = render_to_string('user/user_email_activated_callback.html')
         return response
 
 
