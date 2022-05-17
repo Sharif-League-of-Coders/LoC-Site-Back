@@ -43,7 +43,7 @@ class User(AbstractUser):
             to=[self.email]
         )
 
-        # email.attach_alternative(email_message_html, 'txt/html')
+        email.attach_alternative(email_message_html, 'text/html')
         email.send()
 
     def send_password_confirm_email(self):
