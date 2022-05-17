@@ -166,8 +166,9 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = config('EMAIL_USE_SSL')
 EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_SENDER_USER = config('EMAIL_SENDER_USER')
 
-DOMAIN = 'http://loc.stest.ir/'
+DOMAIN = 'https://locsharif.com/'
 
 LOG_ROOT = config('LOG_ROOT')
 

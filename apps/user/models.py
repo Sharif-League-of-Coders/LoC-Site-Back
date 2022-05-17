@@ -39,7 +39,7 @@ class User(AbstractUser):
         email = EmailMultiAlternatives(
             subject='فعالساری اکانت LoC',
             body=email_message_plaintext,
-            from_email=settings.EMAIL_HOST_USER,
+            from_email=settings.EMAIL_SENDER_USER,
             to=[self.email]
         )
 
