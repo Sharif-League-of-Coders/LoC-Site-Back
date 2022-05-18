@@ -50,6 +50,18 @@ class SignUpAPIView(GenericAPIView):
             status=200
         )
 
+class ShowActivationMailAPIView(GenericAPIView):
+
+    def get(self, request, eid, token):
+        context = {
+            'domain': settings.DOMAIN,
+            'eid': eid,
+            'token': token,
+        }
+
+        email_message_html = render_to_string('user/user_activate_email.html',
+                                        context=context)
+        return HttpResponse(email_message_html)
 
 class ActivateAPIView(GenericAPIView):
 

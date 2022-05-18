@@ -8,6 +8,8 @@ urlpatterns = [
     path('signup', view=SignUpAPIView.as_view(), name='signup'),
     path('activate/<slug:eid>/<slug:token>', view=ActivateAPIView.as_view(),
          name='activate'),
+    path('activationmail/<slug:eid>/<slug:token>', view=ShowActivationMailAPIView.as_view(),
+         name='activationmail'),
     path('logout', view=LogoutAPIView.as_view(), name='logout'),
     path('resend-activation-link', view=ResendActivationEmailAPIView.as_view(),
          name='resend'),

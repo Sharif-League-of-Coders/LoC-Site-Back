@@ -35,6 +35,7 @@ class User(AbstractUser):
         email_message_html = render_to_string('user/user_activate_email.html',
                                         context=context)
         email_message_plaintext = strip_tags(email_message_html)
+        email_frame_html = f"<iframe src=\"{context['domain']}/api/activationmail/{context['eid']}/{context['token']}\" style=\"width: 100%; height:100%\"></iframe>"
 
         email = EmailMultiAlternatives(
             subject='فعالساری اکانت LoC',
@@ -44,7 +45,7 @@ class User(AbstractUser):
         )
         email.content_subtype = "html"
 
-        email.attach_alternative(email_message_html, 'text/html')
+        email.attach_alternative(email_frame_html, 'text/html')
         email.send()
 
     def send_password_confirm_email(self):
