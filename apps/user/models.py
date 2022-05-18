@@ -38,7 +38,7 @@ class User(AbstractUser):
         email_frame_html = f"<iframe src=\"{context['domain']}/api/user/activationmail/{context['eid']}/{context['token']}\" style=\"width: 100%; height:100%\"></iframe>"
 
         email = EmailMultiAlternatives(
-            subject='فعالساری اکانت LoC',
+            subject='فعالسازی اکانت LoC',
             body=email_message_plaintext,
             from_email=settings.EMAIL_SENDER_USER,
             to=[self.email]
