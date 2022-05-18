@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Activated</title>
+  <style>
+    @font-face {
+      font-family: iransanslight;
+      src: url(https://dev.weblite.me:3050/wapp-files/master-wapp/file/82e94254-0bfd-4af3-8ed3-e6c564a5fdbf.ttf);
+    }
+
+    @font-face {
+      font-family: iransansbold;
+      src: url(https://dev.weblite.me:3050/wapp-files/master-wapp/file/622485ef-5438-4720-a60e-0f4906657f31.ttf);
+    }
+
+    body {
+      width: '100vw';
+      display: flex;
+      justify-content: space-between;
+      padding: 61px 143px;
+      background-image: url(https://dev.weblite.me:3050/wapp-files/master-wapp/file/8419efdb-728f-490b-aaf2-6bfcec229939.svg);
+      background-size: 100vw auto;
+      background-repeat: no-repeat;
+      direction: rtl;
+    }
+
+    .title {
+      font-size: 5vw;
+      line-height: 6vw;
+      font-family: iransansbold;
+      margin-bottom: 1vw;
+    }
+
+    .text {
+      font-size: 3vw;
+      line-height: 4vw;
+      text-align: center;
+      font-family: iransanslight;
+    }
+    .bold {
+      font-family: iransansbold;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: '100%';
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30vw;
+      height: 7vw;
+      background: linear-gradient(90deg, #002B99 0%, #8000FF 60.42%, #F300F8 100%);
+      border-radius: 10px;
+      color: white;
+      font-size: 5vw;
+      font-family: iransansbold;
+      margin: 5vw 0;
+    }
+  </style>
+</head>
+
+<body style="width: '100vw';
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 61px 143px;
+      background-image: url(https://dev.weblite.me:3050/wapp-files/master-wapp/file/8419efdb-728f-490b-aaf2-6bfcec229939.svg);
+      background-size: 100vw auto;
+      background-repeat: no-repeat;
+      direction: rtl;">
+      
+ثبت نام اولیه شما با موفقیت انجام شد. لطفا برای نهایی ساختن فرایند ثبت نام دکمه زیر را بفشارید.
+
+    <button class="button" style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30vw;
+      height: 7vw;
+      background: linear-gradient(90deg, #002B99 0%, #8000FF 60.42%, #F300F8 100%);
+      border-radius: 10px;
+      color: white;
+      font-size: 5vw;
+      font-family: iransansbold;
+      margin: 5vw 0;"><a style="text-decoration: none; color: white;" href="{{ domain }}/api/user/activationmail/{{eid}}/{{token}}">کلیک کنید</a></button>
+  </div>
+
+</body>
+
+</html>
