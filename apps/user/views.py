@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate
 from django.utils import timezone
@@ -54,7 +54,10 @@ class SignUpAPIView(GenericAPIView):
 class ActivateAPIView(GenericAPIView):
 
     def get(self, request, eid, token):
-        User.activate(eid, token)
+        try:
+            User.activate(eid, token)
+        except Http404:
+            pass
         greetings_message_html = render_to_string('user/user_email_activated_callback.html',
                                         context={})
         response = HttpResponse(greetings_message_html)
