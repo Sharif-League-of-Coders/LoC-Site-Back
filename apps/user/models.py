@@ -1,3 +1,6 @@
+import string
+import random
+
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -48,11 +51,15 @@ class User(AbstractUser):
         email.send()
 
     def send_password_confirm_email(self):
-        uid = urlsafe_base64_encode(force_bytes(self.id))
+        uid = urlsafe_base64_encode(force_bytes(self.email))
+
+        characters = string.ascii_letters + string.digits + string.punctuation
+        token = ''.join(random.choice(characters) for i in range(64))
+
         ResetPasswordToken.objects.filter(uid=uid).delete()
         reset_password_token = ResetPasswordToken(
             uid=uid,
-            token=Token.objects.create(user=self),
+            token=token,
             expiration_date=timezone.now() + timezone.timedelta(hours=24),
         )
         reset_password_token.save()
