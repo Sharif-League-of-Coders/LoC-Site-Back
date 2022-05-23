@@ -10,7 +10,7 @@ class Team(models.Model):
                                 related_name='created_teams')
 
     def is_complete(self):
-        return self.first_teammate and self.second_teammate  # todo: debug
+        return self.members.count() == 3
 
     def member_count(self):
         return self.members.count()
