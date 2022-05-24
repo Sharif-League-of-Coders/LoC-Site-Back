@@ -68,7 +68,7 @@ class TeamAPIView(GenericAPIView):
         if self.request.method in ['PUT', 'GET', 'DELETE']:
             new_permissions += [HasTeam]
         if self.request.method == 'POST':
-            new_permissions += [NoTeam, PersonComplete]
+            new_permissions += [NoTeam] # , PersonComplete
         return [permission() for permission in new_permissions]
 
 
