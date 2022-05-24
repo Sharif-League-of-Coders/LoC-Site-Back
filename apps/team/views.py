@@ -8,7 +8,7 @@ from rest_framework.generics import GenericAPIView, get_object_or_404
 
 
 from apps.user.permissions import PersonComplete
-from .models import Team, Invitation
+from .models import Team, Invitation, InvitationStatusTypes
 from .permissions import HasTeam, NoTeam
 from .serializers import *
 
@@ -133,13 +133,14 @@ class UserAnswerInvitationAPIView(GenericAPIView):
         if request.data.get('answer') == '1':
             user = invitation.user
             user.team = invitation.team
+            invitation.status = InvitationStatusTypes.ACCEPTED
             invitation.save()
             user.save()
             # if (invitation.team.is_complete()):
             #     invitation.team.reject_all_pending_invitations()
             # user.reject_all_pending_invites()
         if request.data.get('reject') == '1':
-            invitation.type = 'rejected_team_to_user'
+            invitation.status = InvitationStatusTypes.REJECTED
             invitation.save()
 
         return Response(
