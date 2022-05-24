@@ -151,7 +151,7 @@ class UserAnswerInvitationAPIView(GenericAPIView):
 
 
 class TeamSentInvitationListAPIView(GenericAPIView):
-    permission_classes = [IsAuthenticated, HasTeam, ]
+    permission_classes = [IsAuthenticated, ]
     serializer_class = TeamToUserInvitationSerializer
     queryset = Invitation.objects.all()
 
@@ -172,3 +172,9 @@ class TeamSentInvitationListAPIView(GenericAPIView):
             data={"message": "your invitation sent"},
             status=status.HTTP_200_OK
         )
+
+    def get_permissions(self):
+        new_permissions = self.permission_classes.copy()
+        if self.request.method == 'POST':
+            new_permissions += [HasTeam]
+        return [permission() for permission in new_permissions]
