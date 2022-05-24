@@ -37,3 +37,7 @@ class Invitation(models.Model):
         choices=InvitationStatusTypes.TYPES,
         default=InvitationStatusTypes.PENDING
     )
+    type = models.CharField(
+        max_length=50,
+        default='team_to_user',
+    )
