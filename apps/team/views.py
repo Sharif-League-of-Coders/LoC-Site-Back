@@ -29,7 +29,7 @@ class TeamAPIView(GenericAPIView):
         team = self.get_serializer(data=request.data)
         team.is_valid(raise_exception=True)
         team.save()
-        request.user.reject_all_pending_invites()
+        # request.user.reject_all_pending_invites()
         return Response(
             data={
                 "data": team.data
@@ -135,9 +135,9 @@ class UserAnswerInvitationAPIView(GenericAPIView):
             user.team = invitation.team
             invitation.save()
             user.save()
-            if (invitation.team.is_complete()):
-                invitation.team.reject_all_pending_invitations()
-            user.reject_all_pending_invites()
+            # if (invitation.team.is_complete()):
+            #     invitation.team.reject_all_pending_invitations()
+            # user.reject_all_pending_invites()
 
         return Response(
             data={"detail": f"Invitation is {serializer.data['status']}"},
