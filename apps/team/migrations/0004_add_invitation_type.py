@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='invitation',
-            name='type',
+            name='team_to_user',
             field=models.CharField(max_length=30),
         ),
     ]

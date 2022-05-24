@@ -10,9 +10,13 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
+        migrations.RemoveField(
+            model_name='invitation',
+            name='team_to_user',
+        ),
+        migrations.AddField(
             model_name='invitation',
             name='type',
-            field=models.CharField(default='team_to_user', max_length=50),
+            field=models.CharField(default='team_to_user', max_length=30),
         ),
     ]
