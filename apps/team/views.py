@@ -138,6 +138,9 @@ class UserAnswerInvitationAPIView(GenericAPIView):
             # if (invitation.team.is_complete()):
             #     invitation.team.reject_all_pending_invitations()
             # user.reject_all_pending_invites()
+        if request.query_params.get('reject') == '1':
+            invitation.type = 'rejected_team_to_user'
+            invitation.save()
 
         return Response(
             data={"detail": f"Invitation is {serializer.data['status']}"},
