@@ -136,14 +136,16 @@ class PersonAPIView(GenericAPIView):
 
     def get(self, request):
         user = request.user
-        data = self.get_serializer(instance=user.person).data
+        person = self.get_queryset().filter(user=user)
+        data = self.get_serializer(instance=person).data
         return Response(data={'data': data,
                               'token': Token.objects.get(user=user)},
                         status=status.HTTP_200_OK)
 
     def put(self, request):
         user = request.user
-        serializer = PersonSerializer(instance=user.person,
+        person = self.get_queryset().filter(user=user)
+        serializer = PersonSerializer(instance=person,
                                       data=request.data,
                                       partial=True)
         serializer.is_valid(raise_exception=True)
