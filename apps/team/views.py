@@ -133,15 +133,15 @@ class UserAnswerInvitationAPIView(GenericAPIView):
         if request.data.get('answer') == '1':
             user = invitation.user
             user.team = invitation.team
-            invitation.status = InvitationStatusTypes.ACCEPTED
-            invitation.save()
+            serializer.data['status'] = InvitationStatusTypes.ACCEPTED
+            serializer.save()
             user.save()
             # if (invitation.team.is_complete()):
             #     invitation.team.reject_all_pending_invitations()
             # user.reject_all_pending_invites()
         if request.data.get('reject') == '1':
-            invitation.status = InvitationStatusTypes.REJECTED
-            invitation.save()
+            serializer.data['status'] = InvitationStatusTypes.REJECTED
+            serializer.save()
 
         return Response(
             data={"detail": f"Invitation is {serializer.data['status']}"},
