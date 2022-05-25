@@ -92,6 +92,8 @@ class UserSerializer(serializers.ModelSerializer):
         person = Person.objects.create(
             user=user
         )
+        user.save()
+        person.save()
 
         return user
 
