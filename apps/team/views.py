@@ -129,19 +129,17 @@ class UserAnswerInvitationAPIView(GenericAPIView):
         serializer = self.get_serializer(instance=invitation,
                                          data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
         if request.data.get('answer') == True:
             user = invitation.user
             user.team = invitation.team
-            serializer.data['status'] = InvitationStatusTypes.ACCEPTED
-            serializer.save()
+            serializer.validated_data['status'] = InvitationStatusTypes.ACCEPTED
             user.save()
             # if (invitation.team.is_complete()):
             #     invitation.team.reject_all_pending_invitations()
             # user.reject_all_pending_invites()
         if request.data.get('reject') == True:
-            serializer.data['status'] = InvitationStatusTypes.REJECTED
-            serializer.save()
+            serializer.validated_data['status'] = InvitationStatusTypes.REJECTED
+        serializer.save()
 
         return Response(
             data={"detail": f"Invitation is {serializer.data['status']}"},
