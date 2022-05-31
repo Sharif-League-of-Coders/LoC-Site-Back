@@ -1,4 +1,3 @@
-apps/user/admin.pyimport string
 import random
 
 from django.db import models
