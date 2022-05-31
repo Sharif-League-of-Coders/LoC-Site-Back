@@ -1,4 +1,4 @@
-import string
+apps/user/admin.pyimport string
 import random
 
 from django.db import models
@@ -119,6 +119,9 @@ class Person(models.Model):
                 self.lastname, self.university
             )
         )
+
+    def __str__(self):
+        return self.user.email + ' ' + self.firstname + ' ' + self.lastname
 
 
 class ActivateUserToken(models.Model):

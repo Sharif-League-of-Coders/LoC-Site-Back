@@ -12,6 +12,7 @@ class UserAdmin(admin.ModelAdmin):
     # sortable_by = []
     # list_filter = []
 
+
 @admin.register(Person)
 class ProfileAdmin(ModelAdmin):
     # inlines = (SkillInline, JobExperienceInline)

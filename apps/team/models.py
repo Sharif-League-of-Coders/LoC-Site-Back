@@ -15,6 +15,9 @@ class Team(models.Model):
     def member_count(self):
         return self.members.count()
 
+    def __str__(self):
+        return self.name + ' ' + self.creator.email
+
 
 class InvitationStatusTypes:
     PENDING = 'pending'
